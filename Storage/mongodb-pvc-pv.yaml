@@ -1,3 +1,4 @@
+# mongodb-pv-pvc.yaml
 apiVersion: v1
 kind: Pod
 metadata:
@@ -11,11 +12,36 @@ spec:
       name: mongodb
   volumes:
     - name: mongodb
-    persistentVolumeClaim:
-      claimName: mongodb-pvc
+      persistentVolumeClaim:
+        claimName: mongodb-pvc
 ---
 apiVersion: v1
+kind: PersistentVolumeClaim
 metadata:
   name: mongodb-pvc
 spec:
   accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+  storageClassName: ""
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: mongodb-pv
+spec:
+  capacity:
+    storage: 1Gi
+  accessModes:
+  - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  gcePersistentDisk:
+    pdName: mongodb # GCE Persistent Disk Name
+    fsType: ext4
+    
+ #azureDisk:
+  #    kind: Managed
+  #    diskName: mongodb
+  #    diskURI: /subscriptions/38f4cc9c-0848-44e3-973d-b977e39730dc/resourceGroups/MC_gasbugs_k8s_eastus/providers/Microsoft.Compute/disks/mongodb
