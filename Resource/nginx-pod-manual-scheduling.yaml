@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: gpu-nginx-rs
+  labels:
+    app: gpu-nginx
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: gpu-nginx
+  template:
+    metadata:
+      #name: nginx
+      labels:
+        app: gpu-nginx
+    spec:
+      nodeSelector:
+        gpu: "true"
+      containers:
+      - name: gpu-nginx
+        image: nginx
+        ports:
+        - containerPort: 80
+          protocol: TCP
+        resources:
+          requests:
+            cpu: "1m"
+            memory: "200Mi"
+          limits:
+            cpu: "2m"
+            memory: "400Mi"
