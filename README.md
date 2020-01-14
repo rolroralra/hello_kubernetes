@@ -2,5 +2,4 @@
 first practice k8s
 
 # Resource Name Format
-
-<namespace>-<app>-<resource>.yaml
+\<namespace\>-\<app\>-\<resource\>\.yaml
