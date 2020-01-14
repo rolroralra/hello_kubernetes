@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mongodb
+spec:
+  containers:
+  - image: mongo
+    name: mongodb
+    volumeMounts:
+    - mountPath: /data/db
+      name: mongodb
+  volumes:
+    - name: mongodb
+    persistentVolumeClaim:
+      claimName: mongodb-pvc
+---
+apiVersion: v1
+metadata:
+  name: mongodb-pvc
+spec:
+  accessModes:
