@@ -1,0 +1,42 @@
+kind: NetworkPolicy
+apiVersion: networking.k8s.io/v1
+metadata:
+  name: nodejs-v1-ingress
+spec:
+  policyTypes:
+  - Ingress
+  podSelector:
+    matchLabels:
+      app: nodejs-v1
+  ingress:
+  - from:
+    - podSelector:
+        matchLabels:
+          app: nodejs-v2
+---
+kind: NetworkPolicy
+apiVersion: networking.k8s.io/v1
+metadata:
+  name: nodejs-v2-ingress
+spec:
+  policyTypes:
+  - Ingress
+  podSelector:
+    matchLabels:
+      app: nodejs-v2
+  ingress:
+  - from:
+    - podSelector:
+        matchLabels:
+          app: nodejs-v3
+---
+kind: NetworkPolicy
+apiVersion: networking.k8s.io/v1
+metadata:
+  name: nodejs-v3-ingress
+spec:
+  policyTypes:
+  - Ingress
+  podSelector:
+    matchLabels:
+      app: nodejs-v3
