@@ -1,0 +1,9 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  namespace: office
+  name: pod-manager
+rules:
+- apiGroups: ["", "extensions", "apps"] # "" indicates the core API group
+  resources: ["deployments","replicasets","pods"]
+  verbs: ["get", "watch", "list", "create", "update", "patch", "delete"]

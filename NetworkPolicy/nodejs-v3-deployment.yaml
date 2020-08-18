@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nodejs-v3-deployment
+  labels:
+    app: nodejs-v3
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nodejs-v3
+  template:
+    metadata:
+      labels:
+        app: nodejs-v3
+    spec:
+      containers:
+      - name: nodejs
+        image: gasbugs/nodejs:v1
+        ports:
+        - containerPort: 8080
+          protocol: TCP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nodejs-v3-service
+spec:
+  selector:
+    app: nodejs-v3
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080

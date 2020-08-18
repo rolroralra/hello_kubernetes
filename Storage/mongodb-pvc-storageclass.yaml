@@ -1,0 +1,49 @@
+# mongodb-pvc-storageclass.yaml
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mongodb
+spec:
+  containers:
+  - image: mongo
+    name: mongodb
+    volumeMounts:
+    - mountPath: /data/db
+      name: mongodb
+  volumes:
+    - name: mongodb
+      persistentVolumeClaim:
+        claimName: mongodb-pvc
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mongodb-pvc
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+  storageClassName: "storage-class"
+
+---
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: storage-class
+provisioner: kubernetes.io/gce-pd
+parameters:
+  type: pd-ssd
+
+#apiVersion: storage.k8s.io/v1
+#kind: StorageClass
+#metadata:
+#  name: slow
+#provisioner: kubernetes.io/azure-disk
+#parameters:
+#  skuName: Standard_LRS
+#  location: eastus
+#  storageAccount: azure_storage_account_name
