@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    app: busybox
+  name: pod-busybox
+spec:
+  containers:
+  - image: busybox
+    name: pod-busybox
+    env:
+    - name: SLEEP_TIME
+      value: "60"
+    command: ["sleep"]
+    args: ["$(SLEEP_TIME)"]

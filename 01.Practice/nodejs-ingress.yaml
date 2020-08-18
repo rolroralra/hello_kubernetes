@@ -1,0 +1,15 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: nodejs-ingress
+  labels:
+    app: nodejs-ingress
+spec:
+  rules:
+  - host: gasbugs.com
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: nodejs-lb
+          servicePort: 80
