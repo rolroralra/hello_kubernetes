@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  labels:
+    app: kubia
+  name: kubia
+spec:
+  replicas: 3
+  selector:
+    matchExpressions:
+    - key: app
+      operator: In
+      values:
+      - kubia
+    - key: run
+      operator: In
+      values:
+      - test
+  template:
+    metadata:
+      labels:
+        app: kubia
+        run: test
+    spec:
+      containers:
+      - image: luksa/kubia
+        name: kubia
+        ports:
+        - name: http
+          containerPort: 8080
+          protocol: TCP

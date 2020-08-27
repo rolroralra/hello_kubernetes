@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    run: load-generator
+  name: load-generator
+spec:
+  containers:
+  - image: busybox
+    name: load-generator
+    command:
+    - "sh"
+    args:
+    - "-c"
+    - "while true; do wget -q -O- http://php-apache-svc.default.svc.cluster.local; done"
