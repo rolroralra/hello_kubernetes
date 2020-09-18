@@ -1,0 +1,8 @@
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: gce-pd
+provisioner: kubernetes.io/gce-pd
+parameters:
+  type: pd-ssd
+  zone: asia-northeast1-a

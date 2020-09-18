@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    app: mongodb
+  name: mongodb
+spec:
+  containers:
+  - image: mongo
+    name: mongodb
+    ports:
+    - name: mongodb
+      containerPort: 27017
+      protocol: TCP
+    volumeMounts:
+    - name: mongodb-pd
+      mountPath: /data/db
+      readOnly: false
+    resources: {}
+  volumes:
+  - name: mongodb-pd
+    persistentVolumeClaim:
+      claimName: mongodb-pvc
+  dnsPolicy: ClusterFirst
+  restartPolicy: Always
