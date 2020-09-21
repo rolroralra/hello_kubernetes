@@ -4,9 +4,10 @@ trap "exit" SIGINT
 DEFAULT_INTERVAL=10;
 INTERVAL=${INTERVAL:-${DEFAULT_INTERVAL}};
 
-if [[ ! "${INTERVAL}" =~ ^[0-9]+$ ]]
+#if [[ ! "${INTERVAL}" =~ ^[0-9]+$ ]]
+if [ ! ${INTERVAL} -gt 0 ]
 then
-  echo "$(date) Command Argument must be positive number!";
+  echo "$(date) Environment Variable INTERVAL must be positive number!";
   INTERVAL="${DEFAULT_INTERVAL}";
 fi
 
