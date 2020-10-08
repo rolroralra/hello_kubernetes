@@ -1,0 +1,47 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: downward
+spec:
+  containers:
+  - image: busybox
+    name: main
+    command: ["sleep"]
+    args: ["9999999"]
+    volumeMounts:
+    - name: downward
+      mountPath: /etc/downward
+      readOnly: false
+    resources:
+      requests:
+        cpu: 15m
+        memory: 100Ki 
+      limits:
+        cpu: 100m
+        memory: 4Mi
+  volumes:
+  - name: downward
+    downwardAPI:
+      items:
+      - path: podName
+        fieldRef:
+          fieldPath: metadata.name
+      - path: podNamespace
+        fieldRef:
+          fieldPath: metadata.namespace
+      - path: labels
+        fieldRef:
+          fieldPath: metadata.labels
+      - path: annotations
+        fieldRef:
+          fieldPath: metadata.annotations
+      - path: containerCpuRequestMiliCores
+        resourceFieldRef:
+          containerName: main
+          resource: requests.cpu
+          divisor: 1m
+      - path: containerMemoryLimitsBytes
+        resourceFieldRef:
+          containerName: main
+          resource: limits.memory
+          divisor: 1
