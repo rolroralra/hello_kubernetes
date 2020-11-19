@@ -6,10 +6,24 @@ metadata:
     app: nodejs-ingress
 spec:
   rules:
-  - host: kubia.example.com 
+  - host: nodejs-np.rolroralra.com 
     http:
       paths:
       - path: /
         backend:
-          serviceName: nodejs
-          servicePort: 80
+          serviceName: nodejs-np-svc
+          servicePort: http
+#  - host: nodejs-lb.rolroralra.com 
+#    http:
+#      paths:
+#      - path: /
+#        backend:
+#          serviceName: nodejs-lb-svc
+#          servicePort: http
+#  - host: nodejs.rolroralra.com 
+#    http:
+#      paths:
+#      - path: /
+#        backend:
+#          serviceName: nodejs-svc
+#          servicePort: http
