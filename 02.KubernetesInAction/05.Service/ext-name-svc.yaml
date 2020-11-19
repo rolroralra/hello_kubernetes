@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: ext-name-svc
+  name: ext-name-svc
+spec:
+  type: ExternalName
+  externalName: www.naver.com
+  ports:
+  - name: http
+    port: 80
