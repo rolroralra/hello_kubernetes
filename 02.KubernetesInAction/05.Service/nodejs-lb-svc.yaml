@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: nodejs-lb-svc
+  name: nodejs-lb-svc
+spec:
+  type: LoadBalancer
+  sessionAffinity: None           # ClientIP
+  externalTrafficPolicy: Cluster  # Local
+  ports:
+  - name: http
+    port: 80
+    targetPort: http
+    #nodePort: 30001
+    protocol: TCP
+  selector:
+    app: nodejs-deploy
