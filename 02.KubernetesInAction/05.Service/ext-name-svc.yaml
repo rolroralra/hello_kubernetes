@@ -4,6 +4,7 @@ metadata:
   labels:
     app: ext-name-svc
   name: ext-name-svc
+  namespace: default
 spec:
   type: ExternalName
   externalName: www.naver.com

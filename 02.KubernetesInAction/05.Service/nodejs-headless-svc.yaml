@@ -3,9 +3,10 @@ kind: Service
 metadata:
   labels:
     app: nodejs-headless-svc
-  annotations:
-    service.alpha.kubernetes.io/tolerate-unready-endpoints: "false"
+  #annotations:
+    #service.alpha.kubernetes.io/tolerate-unready-endpoints: "false"
   name: nodejs-headless-svc
+  namespace: default
 spec:
   type: ClusterIP
   clusterIP: None
@@ -17,3 +18,4 @@ spec:
     protocol: TCP
   selector:
     app: nodejs
+    enabled: "true"

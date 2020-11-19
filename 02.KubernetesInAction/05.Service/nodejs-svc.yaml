@@ -4,6 +4,7 @@ metadata:
   labels:
     app: nodejs-svc
   name: nodejs-svc
+  namespace: default
 spec:
   type: ClusterIP
   sessionAffinity: None

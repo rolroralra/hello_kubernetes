@@ -4,6 +4,7 @@ metadata:
   labels:
     app: nodejs-np-svc
   name: nodejs-np-svc
+  namespace: default
 spec:
   type: NodePort
   sessionAffinity: None

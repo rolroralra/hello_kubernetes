@@ -4,6 +4,7 @@ metadata:
   labels:
     app: nodejs-lb-svc
   name: nodejs-lb-svc
+  namespace: default
 spec:
   type: LoadBalancer
   sessionAffinity: None           # ClientIP

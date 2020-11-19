@@ -14,15 +14,12 @@ spec:
     metadata:
       labels:
         app: nodejs
+        enabled: "false"
     spec:
       containers:
       - image: rolroralra/nodejs
-        imagePullPolicy: Always
         name: nodejs
         ports:
         - name: http
           containerPort: 8080
           protocol: TCP
-      dnsPolicy: ClusterFirst
-      restartPolicy: Always
-      schedulerName: default-scheduler
