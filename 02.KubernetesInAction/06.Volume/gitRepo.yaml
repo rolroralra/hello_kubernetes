@@ -7,11 +7,6 @@ metadata:
     app: nginx-fortune
 spec:
   containers:
-  - image: rolroralra/fortune
-    name: html-generator
-    volumeMounts:
-    - name: html
-      mountPath: /var/htdocs
   - image: nginx:alpine
     name: web-server
     volumeMounts:
@@ -24,15 +19,17 @@ spec:
       protocol: TCP
   volumes:
   - name: html
-    emptyDir: {}
+    gitRepo:
+      repository: https://github.com/luksa/kubia-website-example.git
+      revision: master
+      directory: .
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: fortune-np-svc
-  namespace: default
   labels:
     app: fortune-np-svc
+  name: fortune-np-svc
 spec:
   type: NodePort
   ports:
